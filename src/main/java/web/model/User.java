@@ -1,6 +1,9 @@
 package web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usersTable")
@@ -11,12 +14,18 @@ public class User {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 1, max = 40, message = "Name should be between 1 to 40 characters")
     private String firstName;
 
+
     @Column(name = "last_name")
+    @NotEmpty(message = "Lastname should not be empty")
+    @Size(min = 1, max = 40, message = "Lastname should be between 1 to 40 characters")
     private String lastName;
 
     @Column(name = "age")
+    @Min(value = 0, message = "Age should be greater than 0")
     private int age;
 
     public User() {
@@ -54,14 +63,12 @@ public class User {
         this.age = age;
     }
 
-
     @Override
     public String toString() {
-        return "User{" +
+        return
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age='" + age + '\'' +
-                '}';
+                        ", firstName='" + firstName + '\'' +
+                        ", lastName='" + lastName + '\'' +
+                        ", age='" + age + '\'';
     }
 }
